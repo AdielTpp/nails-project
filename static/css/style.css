@@ -1,0 +1,20 @@
+/* Custom CSS para estilos que no cubre Tailwind o animaciones específicas */
+
+body {
+    scroll-behavior: smooth;
+}
+
+/* Opcional: Estilo personalizado para barras de desplazamiento */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+::-webkit-scrollbar-thumb {
+    background: #ffd1dc; 
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #b39eb5; 
+}
