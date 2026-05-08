@@ -52,3 +52,8 @@ body {
         opacity: 0;
     }
 }
+
+.luxury-gold-text {
+    color: #d4af37;
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+}

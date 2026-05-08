@@ -1,39 +1,26 @@
 document.addEventListener('DOMContentLoaded', () => {
-    console.log("NailArt.ai - Frontend inicializado.");
+    console.log("Press-On.Nails - Frontend inicializado.");
 
     // ==========================================
     // SPARKLE MOUSE EFFECT (Escarcha)
     // ==========================================
-    let isMouseMoving = false;
-    let sparkleTimeout;
-
     document.addEventListener('mousemove', (e) => {
-        // Limit the rate of sparkle creation to avoid performance issues
         if (Math.random() > 0.3) return; 
 
         const sparkle = document.createElement('div');
         sparkle.classList.add('sparkle');
-        
-        // Random size between 2px and 6px
         const size = Math.random() * 4 + 2;
         sparkle.style.width = `${size}px`;
         sparkle.style.height = `${size}px`;
-        
-        // Position exactly at cursor
         sparkle.style.left = `${e.clientX}px`;
         sparkle.style.top = `${e.clientY}px`;
         
-        // Random fall offset
         const fallX = (Math.random() - 0.5) * 50;
         sparkle.style.setProperty('--fall-x', `${fallX}px`);
 
         document.body.appendChild(sparkle);
-
-        // Remove element after animation completes
         setTimeout(() => {
-            if (sparkle.parentNode) {
-                sparkle.parentNode.removeChild(sparkle);
-            }
+            if (sparkle.parentNode) sparkle.parentNode.removeChild(sparkle);
         }, 1000);
     });
 
@@ -44,13 +31,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const themeIcon = document.getElementById('theme-icon');
     const htmlElement = document.documentElement;
 
-    // Check saved theme
     if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
         htmlElement.classList.add('dark');
         themeIcon.textContent = '☀️';
-    } else {
-        htmlElement.classList.remove('dark');
-        themeIcon.textContent = '🌙';
     }
 
     themeToggleBtn.addEventListener('click', () => {
@@ -65,10 +48,86 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ==========================================
+    // IMAGE VIEWER (LIGHTBOX)
+    // ==========================================
+    const viewer = document.getElementById('image-viewer');
+    const viewerImg = document.getElementById('viewer-img');
+    const viewerTitle = document.getElementById('viewer-title');
+    const viewerPrice = document.getElementById('viewer-price');
+    const closeViewer = document.getElementById('close-viewer');
+    const prevBtn = document.getElementById('prev-img');
+    const nextBtn = document.getElementById('next-img');
+    const catalogContainers = document.querySelectorAll('.catalog-img-container');
+    
+    let currentIndex = 0;
+    const catalogData = [];
+
+    // Recolectar datos del catálogo para el viewer
+    catalogContainers.forEach((container, index) => {
+        const img = container.querySelector('img');
+        const card = container.closest('.group');
+        const title = card.querySelector('h3').innerText;
+        const price = card.querySelector('.absolute.top-4').innerText;
+        
+        catalogData.push({
+            src: img.src,
+            title: title,
+            price: price
+        });
+
+        container.addEventListener('click', () => {
+            openViewer(index);
+        });
+    });
+
+    const openViewer = (index) => {
+        currentIndex = index;
+        updateViewer();
+        viewer.classList.remove('hidden');
+        setTimeout(() => viewer.classList.remove('opacity-0'), 10);
+        document.body.style.overflow = 'hidden'; // Bloquear scroll
+    };
+
+    const updateViewer = () => {
+        const data = catalogData[currentIndex];
+        viewerImg.src = data.src;
+        viewerTitle.innerText = data.title;
+        viewerPrice.innerText = data.price;
+    };
+
+    const closeViewerFunc = () => {
+        viewer.classList.add('opacity-0');
+        setTimeout(() => viewer.classList.add('hidden'), 300);
+        document.body.style.overflow = '';
+    };
+
+    closeViewer.addEventListener('click', closeViewerFunc);
+    viewer.addEventListener('click', (e) => {
+        if (e.target === viewer) closeViewerFunc();
+    });
+
+    prevBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex - 1 + catalogData.length) % catalogData.length;
+        updateViewer();
+    });
+
+    nextBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % catalogData.length;
+        updateViewer();
+    });
+
+    // Soporte para teclado
+    document.addEventListener('keydown', (e) => {
+        if (viewer.classList.contains('hidden')) return;
+        if (e.key === 'Escape') closeViewerFunc();
+        if (e.key === 'ArrowLeft') prevBtn.click();
+        if (e.key === 'ArrowRight') nextBtn.click();
+    });
+
+    // ==========================================
     // SHOPPING CART LOGIC
     // ==========================================
     let cart = [];
-
     const cartBtn = document.getElementById('cart-btn');
     const cartModal = document.getElementById('cart-modal');
     const cartDrawer = document.getElementById('cart-drawer');
@@ -79,11 +138,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const checkoutBtn = document.getElementById('checkout-whatsapp');
     const addToCartBtns = document.querySelectorAll('.add-to-cart-btn');
 
-    // Open/Close Cart
     const toggleCart = () => {
         if (cartModal.classList.contains('hidden')) {
             cartModal.classList.remove('hidden');
-            // Small delay to allow display block to apply before animating opacity
             setTimeout(() => {
                 cartModal.classList.remove('opacity-0');
                 cartDrawer.classList.remove('translate-x-full');
@@ -91,54 +148,41 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             cartModal.classList.add('opacity-0');
             cartDrawer.classList.add('translate-x-full');
-            setTimeout(() => {
-                cartModal.classList.add('hidden');
-            }, 300); // Wait for transition
+            setTimeout(() => cartModal.classList.add('hidden'), 300);
         }
     };
 
     cartBtn.addEventListener('click', toggleCart);
     closeCartBtn.addEventListener('click', toggleCart);
-    // Close on click outside
     cartModal.addEventListener('click', (e) => {
         if (e.target === cartModal) toggleCart();
     });
 
-    // Add to Cart
     addToCartBtns.forEach(btn => {
         btn.addEventListener('click', (e) => {
             const titulo = e.target.getAttribute('data-titulo');
             const precio = parseFloat(e.target.getAttribute('data-precio'));
-
             const existingItem = cart.find(item => item.titulo === titulo);
             if (existingItem) {
                 existingItem.cantidad += 1;
             } else {
                 cart.push({ titulo, precio, cantidad: 1 });
             }
-            
             updateCartUI();
             
-            // Visual feedback on button
             const originalText = e.target.innerText;
             e.target.innerText = '¡Agregado! 💅';
             e.target.classList.add('bg-pastelPink', 'text-white');
-            e.target.classList.remove('text-pastelPink');
             setTimeout(() => {
                 e.target.innerText = originalText;
                 e.target.classList.remove('bg-pastelPink', 'text-white');
-                e.target.classList.add('text-pastelPink');
             }, 1500);
         });
     });
 
-    // Update UI
     const updateCartUI = () => {
-        // Update Count
         const totalItems = cart.reduce((sum, item) => sum + item.cantidad, 0);
         cartCount.textContent = totalItems;
-        
-        // Update Items List
         cartItemsContainer.innerHTML = '';
         if (cart.length === 0) {
             cartItemsContainer.innerHTML = '<p class="text-gray-400 text-center mt-10 italic">Tu carrito está vacío.</p>';
@@ -158,43 +202,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 `;
                 cartItemsContainer.appendChild(itemEl);
             });
-
-            // Add event listeners to remove buttons
             document.querySelectorAll('.remove-btn').forEach(btn => {
                 btn.addEventListener('click', (e) => {
-                    const index = parseInt(e.target.getAttribute('data-index'));
-                    cart.splice(index, 1);
+                    cart.splice(parseInt(e.target.getAttribute('data-index')), 1);
                     updateCartUI();
                 });
             });
         }
-
-        // Update Total
         const totalAmount = cart.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
         cartTotal.textContent = `$${totalAmount.toFixed(2)}`;
     };
 
-    // Checkout to WhatsApp
     checkoutBtn.addEventListener('click', () => {
-        if (cart.length === 0) {
-            alert('Agrega algunos diseños a tu carrito primero 💅');
-            return;
-        }
-
-        let mensaje = "¡Hola! ✨ Me gustaría pedir el siguiente set de Press-On Nails:%0A%0A";
-        
-        cart.forEach(item => {
-            mensaje += `- ${item.cantidad}x ${item.titulo} ($${(item.precio * item.cantidad).toFixed(2)})%0A`;
-        });
-        
+        if (cart.length === 0) { alert('Carrito vacío 💅'); return; }
+        let mensaje = "¡Hola! ✨ Me gustaría pedir:%0A%0A";
+        cart.forEach(item => mensaje += `- ${item.cantidad}x ${item.titulo} ($${(item.precio * item.cantidad).toFixed(2)})%0A`);
         const totalAmount = cart.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
-        mensaje += `%0A*Total: $${totalAmount.toFixed(2)}*%0A%0A`;
-        mensaje += "¿Podrías indicarme los pasos para el pago y mi medida? Gracias 💖";
-
-        // Reemplaza este número por tu número real de WhatsApp (con código de país, ej: 521XXXXXXXXXX)
-        const numeroWhatsApp = "1234567890"; 
-        const url = `https://wa.me/${numeroWhatsApp}?text=${mensaje}`;
-        
-        window.open(url, '_blank');
+        mensaje += `%0A*Total: $${totalAmount.toFixed(2)}*%0A%0A¿Podrías ayudarme con mi pedido?`;
+        window.open(`https://wa.me/1234567890?text=${mensaje}`, '_blank');
     });
 });
