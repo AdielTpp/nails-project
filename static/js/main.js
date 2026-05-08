@@ -5,23 +5,46 @@ document.addEventListener('DOMContentLoaded', () => {
     // SPARKLE MOUSE EFFECT (Escarcha)
     // ==========================================
     document.addEventListener('mousemove', (e) => {
-        if (Math.random() > 0.3) return; 
+        // Crear múltiples chispas para un efecto más denso de brillantina
+        const createSparkle = () => {
+            const sparkle = document.createElement('div');
+            sparkle.classList.add('sparkle');
+            
+            const isPink = Math.random() > 0.5;
+            const color = isPink ? '#ff69b4' : '#d4af37';
+            const glow = isPink ? 'rgba(255, 105, 180, 0.8)' : 'rgba(212, 175, 55, 0.8)';
+            
+            sparkle.style.backgroundColor = color;
+            sparkle.style.boxShadow = `0 0 6px ${color}, 0 0 12px ${glow}`;
+            
+            // Tamaños más variados y pequeños para parecer polvo
+            const size = Math.random() * 5 + 1;
+            sparkle.style.width = `${size}px`;
+            sparkle.style.height = `${size}px`;
+            
+            // Añadir un pequeño desfase aleatorio para que no salgan todas del mismo punto exacto
+            const offsetX = (Math.random() - 0.5) * 15;
+            const offsetY = (Math.random() - 0.5) * 15;
+            sparkle.style.left = `${e.clientX + offsetX}px`;
+            sparkle.style.top = `${e.clientY + offsetY}px`;
+            
+            const fallX = (Math.random() - 0.5) * 100;
+            sparkle.style.setProperty('--fall-x', `${fallX}px`);
 
-        const sparkle = document.createElement('div');
-        sparkle.classList.add('sparkle');
-        const size = Math.random() * 4 + 2;
-        sparkle.style.width = `${size}px`;
-        sparkle.style.height = `${size}px`;
-        sparkle.style.left = `${e.clientX}px`;
-        sparkle.style.top = `${e.clientY}px`;
-        
-        const fallX = (Math.random() - 0.5) * 50;
-        sparkle.style.setProperty('--fall-x', `${fallX}px`);
+            document.body.appendChild(sparkle);
+            
+            // Tiempo de vida aleatorio para naturalidad
+            const lifeTime = 600 + Math.random() * 400;
+            setTimeout(() => {
+                if (sparkle.parentNode) sparkle.parentNode.removeChild(sparkle);
+            }, lifeTime);
+        };
 
-        document.body.appendChild(sparkle);
-        setTimeout(() => {
-            if (sparkle.parentNode) sparkle.parentNode.removeChild(sparkle);
-        }, 1000);
+        // Disparar 2 chispas por cada movimiento para más densidad
+        if (Math.random() > 0.1) {
+            createSparkle();
+            if (Math.random() > 0.5) createSparkle();
+        }
     });
 
     // ==========================================
@@ -58,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const prevBtn = document.getElementById('prev-img');
     const nextBtn = document.getElementById('next-img');
     const catalogContainers = document.querySelectorAll('.catalog-img-container');
-    
+
     let currentIndex = 0;
     const catalogData = [];
 
@@ -68,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const card = container.closest('.group');
         const title = card.querySelector('h3').innerText;
         const price = card.querySelector('.absolute.top-4').innerText;
-        
+
         catalogData.push({
             src: img.src,
             title: title,
@@ -169,7 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 cart.push({ titulo, precio, cantidad: 1 });
             }
             updateCartUI();
-            
+
             const originalText = e.target.innerText;
             e.target.innerText = '¡Agregado! 💅';
             e.target.classList.add('bg-pastelPink', 'text-white');
@@ -219,6 +242,6 @@ document.addEventListener('DOMContentLoaded', () => {
         cart.forEach(item => mensaje += `- ${item.cantidad}x ${item.titulo} ($${(item.precio * item.cantidad).toFixed(2)})%0A`);
         const totalAmount = cart.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
         mensaje += `%0A*Total: $${totalAmount.toFixed(2)}*%0A%0A¿Podrías ayudarme con mi pedido?`;
-        window.open(`https://wa.me/1234567890?text=${mensaje}`, '_blank');
+        window.open(`https://wa.me/9811977228?text=${mensaje}`, '_blank');
     });
 });

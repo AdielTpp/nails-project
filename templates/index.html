@@ -51,6 +51,11 @@
                 <div class="hidden md:flex space-x-8 items-center">
                     <a href="#catalogo"
                         class="text-gray-600 dark:text-gray-300 hover:text-pastelPurple dark:hover:text-luxuryGold hover-glow-gold transition font-medium">Catálogo</a>
+                    <a href="#como-aplicar"
+                        class="text-gray-600 dark:text-gray-300 hover:text-pastelPurple dark:hover:text-luxuryGold hover-glow-gold transition font-medium">Cómo
+                        Aplicar</a>
+                    <a href="#contacto"
+                        class="text-gray-600 dark:text-gray-300 hover:text-pastelPurple dark:hover:text-luxuryGold hover-glow-gold transition font-medium">Contacto</a>
                     <button id="theme-toggle"
                         class="text-gray-500 dark:text-luxuryGold hover:bg-gray-100 dark:hover:bg-luxuryDark p-2 rounded-full hover-glow-box transition-colors">
                         <span id="theme-icon">🌙</span>
@@ -128,6 +133,112 @@
         </div>
     </section>
 
+    <!-- Galería Dinámica (Carruseles) -->
+    <section class="py-12 bg-white dark:bg-luxuryDark overflow-hidden transition-colors duration-500">
+        <div class="text-center mb-10 px-4">
+            <h2 class="text-3xl font-bold dark:text-white hover-glow-gold">Nuestros Diseños en Acción</h2>
+            <div class="w-16 h-1 bg-luxuryGold mx-auto mt-2 rounded-full"></div>
+        </div>
+
+        <!-- Fila 1: Izquierda -->
+        <div class="marquee-container mb-8">
+            <div class="marquee-content">
+                <div class="marquee-item"><img src="{{ url_for('static', filename='img/carousel1.png') }}" alt="Nails">
+                </div>
+                <div class="marquee-item"><img src="{{ url_for('static', filename='img/catalog1.png') }}" alt="Nails">
+                </div>
+                <div class="marquee-item"><img src="{{ url_for('static', filename='img/catalog2.png') }}" alt="Nails">
+                </div>
+                <div class="marquee-item"><img src="{{ url_for('static', filename='img/catalog3.png') }}" alt="Nails">
+                </div>
+                <div class="marquee-item"><img src="{{ url_for('static', filename='img/catalog4.png') }}" alt="Nails">
+                </div>
+                <div class="marquee-item"><img src="{{ url_for('static', filename='img/catalog5.png') }}" alt="Nails">
+                </div>
+                <div class="marquee-item"><img src="{{ url_for('static', filename='img/catalog6.png') }}" alt="Nails">
+                </div>
+                <div class="marquee-item"><img src="{{ url_for('static', filename='img/catalog7.jpg') }}" alt="Nails">
+                </div>
+                <div class="marquee-item"><img src="{{ url_for('static', filename='img/catalog8.jpg') }}" alt="Nails">
+                </div>
+                <div class="marquee-item"><img src="{{ url_for('static', filename='img/catalog9.jpg') }}" alt="Nails">
+                </div>
+
+                <!-- Duplicate for infinite effect -->
+                <div class="marquee-item"><img src="{{ url_for('static', filename='img/carousel1.png') }}" alt="Nails">
+                </div>
+                <div class="marquee-item"><img src="{{ url_for('static', filename='img/catalog1.png') }}" alt="Nails">
+                </div>
+                <div class="marquee-item"><img src="{{ url_for('static', filename='img/catalog2.png') }}" alt="Nails">
+                </div>
+                <div class="marquee-item"><img src="{{ url_for('static', filename='img/catalog3.png') }}" alt="Nails">
+                </div>
+                <div class="marquee-item"><img src="{{ url_for('static', filename='img/catalog4.png') }}" alt="Nails">
+                </div>
+                <div class="marquee-item"><img src="{{ url_for('static', filename='img/catalog5.png') }}" alt="Nails">
+                </div>
+                <div class="marquee-item"><img src="{{ url_for('static', filename='img/catalog6.png') }}" alt="Nails">
+                </div>
+                <div class="marquee-item"><img src="{{ url_for('static', filename='img/catalog7.jpg') }}" alt="Nails">
+                </div>
+                <div class="marquee-item"><img src="{{ url_for('static', filename='img/catalog8.jpg') }}" alt="Nails">
+                </div>
+                <div class="marquee-item"><img src="{{ url_for('static', filename='img/catalog9.jpg') }}" alt="Nails">
+                </div>
+            </div>
+        </div>
+
+        <!-- Fila 2: Derecha -->
+        <div class="marquee-container">
+            <div class="marquee-content-reverse">
+                <div class="marquee-item"><img src="{{ url_for('static', filename='img/hero.png') }}" alt="Nails">
+                </div>
+                <div class="marquee-item"><img src="{{ url_for('static', filename='img/catalog10.jpg') }}" alt="Nails">
+                </div>
+                <div class="marquee-item"><img src="{{ url_for('static', filename='img/catalog11.jpg') }}" alt="Nails">
+                </div>
+                <div class="marquee-item"><img src="{{ url_for('static', filename='img/catalog12.jpg') }}" alt="Nails">
+                </div>
+                <div class="marquee-item"><img src="{{ url_for('static', filename='img/catalog13.jpg') }}" alt="Nails">
+                </div>
+                <div class="marquee-item"><img src="{{ url_for('static', filename='img/catalog14.jpg') }}" alt="Nails">
+                </div>
+                <div class="marquee-item"><img src="{{ url_for('static', filename='img/catalog15.jpg') }}" alt="Nails">
+                </div>
+                <div class="marquee-item"><img src="{{ url_for('static', filename='img/catalog16.jpg') }}" alt="Nails">
+                </div>
+                <div class="marquee-item"><img src="{{ url_for('static', filename='img/catalog17.jpg') }}" alt="Nails">
+                </div>
+                <div class="marquee-item"><img src="{{ url_for('static', filename='img/catalog18.jpg') }}" alt="Nails">
+                </div>
+                <div class="marquee-item"><img src="{{ url_for('static', filename='img/catalog19.jpg') }}" alt="Nails">
+                </div>
+                <!-- Duplicate for infinite effect -->
+                <div class="marquee-item"><img src="{{ url_for('static', filename='img/hero.png') }}" alt="Nails">
+                </div>
+                <div class="marquee-item"><img src="{{ url_for('static', filename='img/catalog10.jpg') }}" alt="Nails">
+                </div>
+                <div class="marquee-item"><img src="{{ url_for('static', filename='img/catalog11.jpg') }}" alt="Nails">
+                </div>
+                <div class="marquee-item"><img src="{{ url_for('static', filename='img/catalog12.jpg') }}" alt="Nails">
+                </div>
+                <div class="marquee-item"><img src="{{ url_for('static', filename='img/catalog13.jpg') }}" alt="Nails">
+                </div>
+                <div class="marquee-item"><img src="{{ url_for('static', filename='img/catalog14.jpg') }}" alt="Nails">
+                </div>
+                <div class="marquee-item"><img src="{{ url_for('static', filename='img/catalog15.jpg') }}" alt="Nails">
+                </div>
+                <div class="marquee-item"><img src="{{ url_for('static', filename='img/catalog16.jpg') }}" alt="Nails">
+                </div>
+                <div class="marquee-item"><img src="{{ url_for('static', filename='img/catalog17.jpg') }}" alt="Nails">
+                </div>
+                <div class="marquee-item"><img src="{{ url_for('static', filename='img/catalog18.jpg') }}" alt="Nails">
+                </div>
+                <div class="marquee-item"><img src="{{ url_for('static', filename='img/catalog19.jpg') }}" alt="Nails">
+                </div>
+            </div>
+    </section>
+
     <!-- Catálogo Dinámico -->
     <section id="catalogo" class="py-24 bg-lightBg dark:bg-luxuryBlack transition-colors duration-500">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -200,6 +311,141 @@
             class="absolute right-4 md:right-10 text-white text-5xl hover:text-luxuryGold transition-all transform hover:scale-110 z-[110]">&rsaquo;</button>
     </div>
 
+    <!-- ¿Cómo Aplicarlo? -->
+    <section id="como-aplicar" class="py-24 bg-white dark:bg-luxuryDark transition-colors duration-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-darkText dark:text-white mb-4 hover-glow-gold">Guía de Aplicación
+                </h2>
+                <p class="text-gray-500 dark:text-gray-400">Sigue estos pasos para un acabado profesional y duradero.
+                </p>
+                <div class="w-24 h-1 bg-luxuryGold mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-8">
+                    <div class="flex gap-6 items-start">
+                        <div
+                            class="flex-shrink-0 w-12 h-12 bg-luxuryGold text-luxuryBlack rounded-full flex items-center justify-center font-bold text-xl shadow-lg">
+                            1</div>
+                        <div>
+                            <h4 class="text-xl font-bold dark:text-white">Limpia y Prepara</h4>
+                            <p class="text-gray-500 dark:text-gray-400">Limpia tus uñas con alcohol para eliminar
+                                aceites y lima suavemente la superficie.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-6 items-start">
+                        <div
+                            class="flex-shrink-0 w-12 h-12 bg-luxuryGold text-luxuryBlack rounded-full flex items-center justify-center font-bold text-xl shadow-lg">
+                            2</div>
+                        <div>
+                            <h4 class="text-xl font-bold dark:text-white">Elige el Tamaño</h4>
+                            <p class="text-gray-500 dark:text-gray-400">Selecciona el tamaño de uña press-on que mejor
+                                se ajuste a cada dedo.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-6 items-start">
+                        <div
+                            class="flex-shrink-0 w-12 h-12 bg-luxuryGold text-luxuryBlack rounded-full flex items-center justify-center font-bold text-xl shadow-lg">
+                            3</div>
+                        <div>
+                            <h4 class="text-xl font-bold dark:text-white">Aplica Adhesivo</h4>
+                            <p class="text-gray-500 dark:text-gray-400">Coloca el adhesivo o una gota de pegamento en la
+                                uña press-on.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-6 items-start">
+                        <div
+                            class="flex-shrink-0 w-12 h-12 bg-luxuryGold text-luxuryBlack rounded-full flex items-center justify-center font-bold text-xl shadow-lg">
+                            4</div>
+                        <div>
+                            <h4 class="text-xl font-bold dark:text-white">Presiona Firme</h4>
+                            <p class="text-gray-500 dark:text-gray-400">Alinea con la cutícula y presiona firmemente
+                                durante 30 segundos.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative group">
+                    <img src="{{ url_for('static', filename='img/steps.png') }}" alt="Pasos de aplicación"
+                        class="rounded-[3rem] shadow-2xl transition-transform duration-500 group-hover:scale-[1.02] border-4 border-white/50 dark:border-luxuryGold/20">
+                    <div
+                        class="absolute -bottom-6 -right-6 w-32 h-32 bg-luxuryGold rounded-full flex items-center justify-center text-4xl shadow-2xl animate-bounce">
+                        ✨</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonios -->
+    <section class="py-24 bg-lightBg dark:bg-luxuryBlack transition-colors duration-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-darkText dark:text-white mb-4 hover-glow-gold">Lo que nuestras
+                    clientes dicen</h2>
+                <div class="w-24 h-1 bg-luxuryGold mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div
+                    class="bg-white dark:bg-luxuryDark p-8 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-800 transition-all hover:-translate-y-2">
+                    <div class="text-luxuryGold mb-4 text-2xl">★★★★★</div>
+                    <p class="text-gray-600 dark:text-gray-400 italic mb-6">"¡Me encantaron! Se ven súper naturales y me
+                        duraron más de dos semanas. El diseño es precioso."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 bg-pastelPink rounded-full"></div>
+                        <span class="font-bold dark:text-white">Ana G.</span>
+                    </div>
+                </div>
+                <div
+                    class="bg-white dark:bg-luxuryDark p-8 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-800 transition-all hover:-translate-y-2">
+                    <div class="text-luxuryGold mb-4 text-2xl">★★★★★</div>
+                    <p class="text-gray-600 dark:text-gray-400 italic mb-6">"La calidad es increíble, el diseño es
+                        idéntico a la foto. ¡Súper recomendadas para cualquier evento!"</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 bg-pastelBlue rounded-full"></div>
+                        <span class="font-bold dark:text-white">María F.</span>
+                    </div>
+                </div>
+                <div
+                    class="bg-white dark:bg-luxuryDark p-8 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-800 transition-all hover:-translate-y-2">
+                    <div class="text-luxuryGold mb-4 text-2xl">★★★★★</div>
+                    <p class="text-gray-600 dark:text-gray-400 italic mb-6">"El envío fue súper rápido y el empaque es
+                        precioso. Definitivamente volveré a pedir mis sets aquí."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 bg-pastelPurple rounded-full"></div>
+                        <span class="font-bold dark:text-white">Lucía R.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contacto" class="py-24 bg-white dark:bg-luxuryDark transition-colors duration-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div
+                class="bg-luxuryBlack rounded-[4rem] p-12 md:p-20 text-center space-y-8 shadow-2xl relative overflow-hidden border-2 border-luxuryGold/20">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-luxuryGold/10 blur-[100px]"></div>
+                <div class="absolute bottom-0 left-0 w-64 h-64 bg-pastelPink/10 blur-[100px]"></div>
+
+                <h2 class="text-4xl md:text-5xl font-extrabold text-white">¿Lista para lucir increíble?</h2>
+                <p class="text-gray-400 max-w-xl mx-auto text-lg italic">Escríbenos para resolver cualquier duda o
+                    realizar un pedido personalizado especial.</p>
+
+                <div class="flex flex-wrap justify-center gap-8 pt-4">
+                    <a href="https://wa.me/9811977228" target="_blank"
+                        class="bg-[#25D366] text-white px-8 py-4 rounded-2xl font-bold shadow-xl hover:scale-105 transition flex items-center gap-3">
+                        <span>📱</span> WhatsApp
+                    </a>
+                    <a href="https://www.instagram.com/pressonnails281" target="_blank"
+                        class="bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-600 text-white px-8 py-4 rounded-2xl font-bold shadow-xl hover:scale-105 transition flex items-center gap-3">
+                        <span>📸</span> Instagram
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <footer
         class="bg-white dark:bg-luxuryDark border-t border-gray-100 dark:border-gray-800 py-16 transition-colors duration-500">
         <div class="max-w-7xl mx-auto px-4 text-center space-y-6">
@@ -207,9 +453,12 @@
                 class="font-bold text-3xl tracking-tighter text-pastelPurple dark:text-white transition-colors">Press-On<span
                     class="text-pastelPink dark:text-luxuryGold transition-colors">.Nails</span></span>
             <div class="flex justify-center gap-8 text-gray-400 font-medium">
-                <a href="#" class="hover:text-pastelPink dark:hover:text-luxuryGold transition">Instagram</a>
-                <a href="#" class="hover:text-pastelPink dark:hover:text-luxuryGold transition">TikTok</a>
-                <a href="#" class="hover:text-pastelPink dark:hover:text-luxuryGold transition">WhatsApp</a>
+                <a href="https://www.instagram.com/pressonnails281?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+                    target="_blank" class="hover:text-pastelPink dark:hover:text-luxuryGold transition">Instagram</a>
+                <a href="https://www.tiktok.com/@pressonnails281?is_from_webapp=1&sender_device=pc" target="_blank"
+                    class="hover:text-pastelPink dark:hover:text-luxuryGold transition">TikTok</a>
+                <a href="https://wa.me/9811977228" target="_blank"
+                    class="hover:text-pastelPink dark:hover:text-luxuryGold transition">WhatsApp</a>
             </div>
             <p class="text-gray-400 text-sm">&copy; 2026 Press-on.Nails - Creado para emprendedoras con estilo.</p>
         </div>
