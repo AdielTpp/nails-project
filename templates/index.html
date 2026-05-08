@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
@@ -18,7 +19,12 @@
                         pastelBlue: '#aec6cf',
                         pastelPurple: '#b39eb5',
                         darkText: '#2d3748',
-                        lightBg: '#fcfcfc'
+                        lightBg: '#fcfcfc',
+                        // Elegant Dark Mode Colors
+                        luxuryBlack: '#0a0a0a',
+                        luxuryDark: '#121212',
+                        luxuryGold: '#d4af37',
+                        luxuryGoldLight: '#f3e5ab'
                     },
                     fontFamily: {
                         sans: ['Outfit', 'sans-serif'],
@@ -29,22 +35,32 @@
     </script>
 </head>
 
-<body class="bg-lightBg text-darkText font-sans antialiased selection:bg-pastelPink selection:text-white">
+<body
+    class="bg-lightBg dark:bg-luxuryBlack text-darkText dark:text-gray-200 font-sans antialiased selection:bg-pastelPink dark:selection:bg-luxuryGold selection:text-white transition-colors duration-500">
 
     <!-- Navbar -->
-    <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-pastelPink/30">
+    <nav
+        class="fixed w-full z-50 bg-white/80 dark:bg-luxuryBlack/80 backdrop-blur-md border-b border-pastelPink/30 dark:border-luxuryGold/30 transition-colors duration-500">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <div class="flex-shrink-0 flex items-center">
-                    <span class="font-bold text-2xl tracking-tighter text-pastelPurple">Press-On<span
-                            class="text-pastelPink">.nails</span></span>
+                    <span
+                        class="font-bold text-2xl tracking-tighter text-pastelPurple dark:text-white transition-colors duration-500">Press-On<span
+                            class="text-pastelPink dark:text-luxuryGold transition-colors duration-500">.nails</span></span>
                 </div>
                 <div class="hidden md:flex space-x-8 items-center">
                     <a href="#catalogo"
-                        class="text-gray-600 hover:text-pastelPurple transition font-medium">Catálogo</a>
-                    <a href="#crear" class="text-gray-600 hover:text-pastelPurple transition font-medium">Crea tu
+                        class="text-gray-600 dark:text-gray-300 hover:text-pastelPurple dark:hover:text-luxuryGold hover-glow-gold transition font-medium">Catálogo</a>
+                    <a href="#crear"
+                        class="text-gray-600 dark:text-gray-300 hover:text-pastelPurple dark:hover:text-luxuryGold hover-glow-gold transition font-medium">Crea
+                        tu
                         Diseño</a>
-                    <a href="/admin" class="text-xs text-gray-400 hover:text-gray-600 transition">Admin</a>
+                    <button id="theme-toggle"
+                        class="text-gray-500 dark:text-luxuryGold hover:bg-gray-100 dark:hover:bg-luxuryDark p-2 rounded-full hover-glow-box transition-colors">
+                        <span id="theme-icon">🌙</span>
+                    </button>
+                    <a href="/admin"
+                        class="text-xs text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition">Admin</a>
                 </div>
             </div>
         </div>
@@ -58,9 +74,12 @@
                 class="inline-block px-4 py-1 rounded-full bg-pastelPink/20 text-pastelPurple text-sm font-semibold mb-2 border border-pastelPink/50">
                 ✨ {{ hero['titulo'] if hero else 'Nueva Colección' }}
             </div>
-            <h1 class="text-5xl md:text-6xl font-extrabold leading-tight">
+            <h1
+                class="text-5xl md:text-6xl font-extrabold leading-tight text-darkText dark:text-white transition-colors">
                 Tus uñas, <br>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-pastelPink to-pastelPurple">tu propio
+                <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-pastelPink to-pastelPurple dark:from-luxuryGoldLight dark:to-luxuryGold transition-colors">tu
+                    propio
                     lienzo</span>
             </h1>
             <p class="text-lg text-gray-500 max-w-md mx-auto md:mx-0 leading-relaxed">
@@ -68,10 +87,10 @@
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start pt-6">
                 <a href="#crear"
-                    class="px-8 py-3 rounded-full bg-pastelPurple text-white font-semibold hover:bg-opacity-90 transition shadow-[0_10px_20px_rgba(179,158,181,0.3)] hover:shadow-[0_15px_30px_rgba(179,158,181,0.5)] transform hover:-translate-y-1 text-center">Diseñar
+                    class="px-8 py-3 rounded-full bg-pastelPurple text-white font-semibold hover:bg-opacity-90 transition shadow-[0_10px_20px_rgba(179,158,181,0.3)] hover:shadow-[0_15px_30px_rgba(179,158,181,0.5)] transform hover:-translate-y-1 text-center hover-glow-box">Diseñar
                     con IA ✨</a>
                 <a href="#catalogo"
-                    class="px-8 py-3 rounded-full bg-white border-2 border-pastelPink text-pastelPink font-semibold hover:bg-pastelPink hover:text-white transition shadow-sm text-center">Ver
+                    class="px-8 py-3 rounded-full bg-white border-2 border-pastelPink text-pastelPink dark:border-luxuryGold dark:text-luxuryGold dark:bg-luxuryDark font-semibold hover:bg-pastelPink hover:text-white dark:hover:bg-luxuryGold dark:hover:text-luxuryBlack transition shadow-sm text-center hover-glow-box">Ver
                     Catálogo</a>
             </div>
         </div>
@@ -86,62 +105,69 @@
     </section>
 
     <!-- Cómo funciona -->
-    <section class="py-20 bg-white">
+    <section class="py-20 bg-white dark:bg-luxuryDark transition-colors duration-500">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
                 <div class="space-y-4">
                     <div
-                        class="w-16 h-16 bg-pastelPink/20 text-pastelPink rounded-2xl flex items-center justify-center mx-auto text-2xl">
+                        class="w-16 h-16 bg-pastelPink/20 dark:bg-luxuryGold/20 text-pastelPink dark:text-luxuryGold rounded-2xl flex items-center justify-center mx-auto text-2xl transition-colors">
                         🎨</div>
-                    <h3 class="text-xl font-bold">1. Elige o Crea</h3>
-                    <p class="text-gray-500">Selecciona un diseño de nuestro catálogo o crea el tuyo con IA.</p>
+                    <h3 class="text-xl font-bold dark:text-white transition-colors">1. Elige o Crea</h3>
+                    <p class="text-gray-500 dark:text-gray-400 transition-colors">Selecciona un diseño de nuestro
+                        catálogo o crea el tuyo con IA.</p>
                 </div>
                 <div class="space-y-4">
                     <div
-                        class="w-16 h-16 bg-pastelBlue/20 text-pastelBlue rounded-2xl flex items-center justify-center mx-auto text-2xl">
+                        class="w-16 h-16 bg-pastelBlue/20 dark:bg-luxuryGoldLight/20 text-pastelBlue dark:text-luxuryGoldLight rounded-2xl flex items-center justify-center mx-auto text-2xl transition-colors">
                         📏</div>
-                    <h3 class="text-xl font-bold">2. Personaliza</h3>
-                    <p class="text-gray-500">Dinos tu medida y detalles adicionales para que queden perfectas.</p>
+                    <h3 class="text-xl font-bold dark:text-white transition-colors">2. Personaliza</h3>
+                    <p class="text-gray-500 dark:text-gray-400 transition-colors">Dinos tu medida y detalles adicionales
+                        para que queden perfectas.</p>
                 </div>
                 <div class="space-y-4">
                     <div
-                        class="w-16 h-16 bg-pastelPurple/20 text-pastelPurple rounded-2xl flex items-center justify-center mx-auto text-2xl">
+                        class="w-16 h-16 bg-pastelPurple/20 dark:bg-luxuryGold/20 text-pastelPurple dark:text-luxuryGold rounded-2xl flex items-center justify-center mx-auto text-2xl transition-colors">
                         📦</div>
-                    <h3 class="text-xl font-bold">3. Recibe</h3>
-                    <p class="text-gray-500">Enviamos tu set personalizado listo para lucir en minutos.</p>
+                    <h3 class="text-xl font-bold dark:text-white transition-colors">3. Recibe</h3>
+                    <p class="text-gray-500 dark:text-gray-400 transition-colors">Enviamos tu set personalizado listo
+                        para lucir en minutos.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Catálogo Dinámico -->
-    <section id="catalogo" class="py-24 bg-lightBg">
+    <section id="catalogo" class="py-24 bg-lightBg dark:bg-luxuryBlack transition-colors duration-500">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-darkText mb-4">Nuestro Catálogo</h2>
-                <div class="w-24 h-1 bg-pastelPink mx-auto rounded-full"></div>
+                <h2 class="text-4xl font-bold text-darkText dark:text-white mb-4 transition-colors hover-glow-gold">Nuestro Catálogo
+                </h2>
+                <div class="w-24 h-1 bg-pastelPink dark:bg-luxuryGold mx-auto rounded-full transition-colors hover-glow-box"></div>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 {% for item in catalog %}
                 <div
-                    class="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col">
+                    class="group bg-white dark:bg-luxuryDark rounded-3xl overflow-hidden shadow-sm hover:shadow-xl dark:shadow-none dark:hover:shadow-[0_10px_30px_rgba(212,175,55,0.15)] transition-all duration-300 border border-gray-100 dark:border-gray-800 flex flex-col">
                     <div class="relative overflow-hidden aspect-[4/5]">
                         <img src="{{ item['imagen_url'] }}" alt="{{ item['titulo'] }}"
                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
                         <div
-                            class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-pastelPurple border border-pastelPurple/20">
+                            class="absolute top-4 right-4 bg-white/90 dark:bg-luxuryBlack/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-pastelPurple dark:text-luxuryGold border border-pastelPurple/20 dark:border-luxuryGold/20 transition-colors">
                             ${{ item['precio'] }}
                         </div>
                     </div>
                     <div class="p-6 flex-1 flex flex-col justify-between">
                         <div>
-                            <h3 class="text-xl font-bold text-darkText mb-2">{{ item['titulo'] }}</h3>
-                            <p class="text-gray-500 text-sm leading-relaxed mb-4">{{ item['descripcion'] }}</p>
+                            <h3 class="text-xl font-bold text-darkText dark:text-white mb-2 transition-colors hover-glow-gold">{{
+                                item['titulo'] }}</h3>
+                            <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-4 transition-colors">
+                                {{ item['descripcion'] }}</p>
                         </div>
                         <button
-                            class="w-full py-3 rounded-xl border-2 border-pastelPink text-pastelPink font-bold hover:bg-pastelPink hover:text-white transition-colors">
-                            Ordenar ahora
+                            class="add-to-cart-btn w-full py-3 rounded-xl border-2 border-pastelPink dark:border-luxuryGold text-pastelPink dark:text-luxuryGold font-bold hover:bg-pastelPink dark:hover:bg-luxuryGold hover:text-white dark:hover:text-luxuryBlack transition-colors hover-glow-box"
+                            data-titulo="{{ item['titulo'] }}" data-precio="{{ item['precio'] }}">
+                            Agregar al Carrito
                         </button>
                     </div>
                 </div>
@@ -151,56 +177,65 @@
     </section>
 
     <!-- Sección de Creación -->
-    <section id="crear" class="py-24 bg-gradient-to-b from-lightBg to-pastelPurple/10">
+    <section id="crear"
+        class="py-24 bg-gradient-to-b from-lightBg to-pastelPurple/10 dark:from-luxuryBlack dark:to-luxuryDark transition-colors duration-500">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <span class="text-pastelPurple font-bold tracking-widest uppercase text-xs">Laboratorio Creativo</span>
-                <h2 class="text-4xl font-bold text-darkText mt-4 mb-4">Crea tu Diseño Único</h2>
-                <div class="w-24 h-1 bg-pastelPurple mx-auto rounded-full mb-6"></div>
-                <p class="text-gray-500 max-w-2xl mx-auto">Usa nuestro generador con IA FLUX.1 o dibuja a mano los
+                <span
+                    class="text-pastelPurple dark:text-luxuryGold font-bold tracking-widest uppercase text-xs transition-colors">Laboratorio
+                    Creativo</span>
+                <h2 class="text-4xl font-bold text-darkText dark:text-white mt-4 mb-4 transition-colors">Crea tu Diseño
+                    Único</h2>
+                <div class="w-24 h-1 bg-pastelPurple dark:bg-luxuryGold mx-auto rounded-full mb-6 transition-colors">
+                </div>
+                <p class="text-gray-500 dark:text-gray-400 max-w-2xl mx-auto transition-colors">Usa nuestro generador
+                    con IA FLUX.1 o dibuja a mano los
                     detalles de tu próximo set press-on.</p>
             </div>
 
-            <div class="bg-white rounded-[3rem] shadow-2xl p-8 md:p-12 border border-white/50 max-w-5xl mx-auto">
+            <div
+                class="bg-white dark:bg-luxuryDark rounded-[3rem] shadow-2xl p-8 md:p-12 border border-white/50 dark:border-gray-800 max-w-5xl mx-auto transition-colors duration-500">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                     <div class="space-y-8">
                         <div>
-                            <h4 class="text-xl font-bold mb-4">Generador por Prompt</h4>
+                            <h4 class="text-xl font-bold mb-4 dark:text-white transition-colors">Generador por Prompt
+                            </h4>
                             <div class="relative">
                                 <textarea id="ai-prompt" rows="3"
-                                    class="w-full px-6 py-4 rounded-2xl bg-gray-50 border-2 border-transparent focus:border-pastelPurple focus:bg-white transition-all outline-none resize-none"
-                                    placeholder="Describe tus uñas ideales (ej: color lavanda con mariposas doradas)..."></textarea>
+                                    class="w-full px-6 py-4 rounded-2xl bg-gray-50 dark:bg-luxuryBlack dark:text-white dark:placeholder-gray-500 border-2 border-transparent focus:border-pastelPurple dark:focus:border-luxuryGold focus:bg-white dark:focus:bg-luxuryBlack transition-all outline-none resize-none"
+                                    placeholder="Describe tus uñas ideales (ej: negro mate con destellos dorados)..."></textarea>
                                 <button
-                                    class="mt-4 w-full bg-pastelPurple text-white py-4 rounded-2xl font-bold shadow-lg hover:shadow-pastelPurple/30 transition-all flex items-center justify-center gap-2">
+                                    class="mt-4 w-full bg-pastelPurple dark:bg-luxuryGold text-white dark:text-luxuryBlack py-4 rounded-2xl font-bold shadow-lg hover:shadow-pastelPurple/30 dark:hover:shadow-luxuryGold/30 transition-all flex items-center justify-center gap-2">
                                     Generar con FLUX.1 ✨
                                 </button>
                             </div>
                         </div>
-                        <div class="pt-6 border-t border-gray-100">
-                            <h4 class="text-xl font-bold mb-4">Canvas de Dibujo</h4>
+                        <div class="pt-6 border-t border-gray-100 dark:border-gray-800 transition-colors">
+                            <h4 class="text-xl font-bold mb-4 dark:text-white transition-colors">Canvas de Dibujo</h4>
                             <p class="text-gray-400 text-sm mb-4 italic">El canvas de dibujo aparecerá aquí para
                                 detalles manuales.</p>
                             <div class="flex gap-2">
                                 <div
-                                    class="w-8 h-8 rounded-full bg-pastelPink cursor-pointer border-2 border-white shadow-sm hover:scale-110 transition">
+                                    class="w-8 h-8 rounded-full bg-pastelPink cursor-pointer border-2 border-white dark:border-luxuryDark shadow-sm hover:scale-110 transition">
                                 </div>
                                 <div
-                                    class="w-8 h-8 rounded-full bg-pastelBlue cursor-pointer border-2 border-white shadow-sm hover:scale-110 transition">
+                                    class="w-8 h-8 rounded-full bg-pastelBlue cursor-pointer border-2 border-white dark:border-luxuryDark shadow-sm hover:scale-110 transition">
                                 </div>
                                 <div
-                                    class="w-8 h-8 rounded-full bg-pastelPurple cursor-pointer border-2 border-white shadow-sm hover:scale-110 transition">
+                                    class="w-8 h-8 rounded-full bg-pastelPurple cursor-pointer border-2 border-white dark:border-luxuryDark shadow-sm hover:scale-110 transition">
                                 </div>
                                 <div
-                                    class="w-8 h-8 rounded-full bg-black cursor-pointer border-2 border-white shadow-sm hover:scale-110 transition">
+                                    class="w-8 h-8 rounded-full bg-luxuryGold cursor-pointer border-2 border-white dark:border-luxuryDark shadow-sm hover:scale-110 transition">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div
-                        class="relative aspect-square bg-gray-50 rounded-[2.5rem] border-2 border-dashed border-gray-200 flex items-center justify-center overflow-hidden">
+                        class="relative aspect-square bg-gray-50 dark:bg-luxuryBlack rounded-[2.5rem] border-2 border-dashed border-gray-200 dark:border-gray-700 flex items-center justify-center overflow-hidden transition-colors">
                         <div class="text-center p-8">
                             <div class="text-5xl mb-4">💅</div>
-                            <p class="text-gray-400 font-medium">Tu diseño aparecerá aquí</p>
+                            <p class="text-gray-400 dark:text-gray-500 font-medium transition-colors">Tu diseño
+                                aparecerá aquí</p>
                         </div>
                     </div>
                 </div>
@@ -208,18 +243,60 @@
         </div>
     </section>
 
-    <footer class="bg-white border-t border-gray-100 py-16">
+    <footer
+        class="bg-white dark:bg-luxuryDark border-t border-gray-100 dark:border-gray-800 py-16 transition-colors duration-500">
         <div class="max-w-7xl mx-auto px-4 text-center space-y-6">
-            <span class="font-bold text-3xl tracking-tighter text-pastelPurple">NailArt<span
-                    class="text-pastelPink">.ai</span></span>
+            <span
+                class="font-bold text-3xl tracking-tighter text-pastelPurple dark:text-white transition-colors">Press-On<span
+                    class="text-pastelPink dark:text-luxuryGold transition-colors">.Nails</span></span>
             <div class="flex justify-center gap-8 text-gray-400 font-medium">
-                <a href="#" class="hover:text-pastelPink transition">Instagram</a>
-                <a href="#" class="hover:text-pastelPink transition">TikTok</a>
-                <a href="#" class="hover:text-pastelPink transition">WhatsApp</a>
+                <a href="#" class="hover:text-pastelPink dark:hover:text-luxuryGold transition">Instagram</a>
+                <a href="#" class="hover:text-pastelPink dark:hover:text-luxuryGold transition">TikTok</a>
+                <a href="#" class="hover:text-pastelPink dark:hover:text-luxuryGold transition">WhatsApp</a>
             </div>
-            <p class="text-gray-400 text-sm">&copy; 2026 NailArt.ai - Creado para emprendedoras con estilo.</p>
+            <p class="text-gray-400 text-sm">&copy; 2026 Press-on.Nails - Creado para emprendedoras con estilo.</p>
         </div>
     </footer>
+
+    <!-- Botón Flotante del Carrito -->
+    <button id="cart-btn"
+        class="fixed bottom-8 right-8 bg-pastelPurple dark:bg-luxuryGold text-white dark:text-luxuryBlack p-4 rounded-full shadow-2xl hover:scale-110 transition-transform z-50 flex items-center justify-center">
+        <span class="text-2xl">🛒</span>
+        <span id="cart-count"
+            class="absolute -top-2 -right-2 bg-pastelPink dark:bg-white text-white dark:text-luxuryBlack text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center border-2 border-white dark:border-luxuryGold">0</span>
+    </button>
+
+    <!-- Modal del Carrito -->
+    <div id="cart-modal"
+        class="fixed inset-0 bg-black/50 backdrop-blur-sm z-[60] hidden opacity-0 transition-opacity duration-300 flex justify-end">
+        <div class="bg-white dark:bg-luxuryDark w-full max-w-md h-full shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col"
+            id="cart-drawer">
+            <div
+                class="p-6 border-b border-gray-100 dark:border-gray-800 flex justify-between items-center bg-lightBg dark:bg-luxuryBlack transition-colors">
+                <h2 class="text-2xl font-bold text-pastelPurple dark:text-luxuryGold transition-colors">Tu Carrito 💅
+                </h2>
+                <button id="close-cart"
+                    class="text-gray-400 dark:text-gray-500 hover:text-red-500 dark:hover:text-red-400 text-2xl font-bold">&times;</button>
+            </div>
+
+            <div class="flex-1 overflow-y-auto p-6 space-y-4" id="cart-items">
+                <p class="text-gray-400 text-center mt-10 italic">Tu carrito está vacío.</p>
+            </div>
+
+            <div
+                class="p-6 border-t border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-luxuryBlack transition-colors">
+                <div class="flex justify-between items-center mb-6">
+                    <span class="font-bold text-gray-500 dark:text-gray-400">Total:</span>
+                    <span class="font-extrabold text-2xl text-darkText dark:text-white transition-colors"
+                        id="cart-total">$0.00</span>
+                </div>
+                <button id="checkout-whatsapp"
+                    class="w-full bg-[#25D366] text-white font-bold py-4 rounded-xl shadow-lg hover:bg-[#128C7E] transition flex items-center justify-center gap-2">
+                    <span>📱</span> Enviar pedido por WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
 
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
